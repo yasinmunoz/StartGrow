@@ -1,0 +1,273 @@
+﻿@model StartGrow.Models.SolicitudViewModels.SelectProyectosForSolicitudViewModel;
+@{
+    ViewData["Title"] = "Seleccione los proyectos que vaya a publicar";
+}
+
+<head>
+    <style>
+        .areas {
+            position: absolute;
+            top: 150px;
+            left: 100px;
+        }
+
+        .areas2 {
+            position: absolute;
+            top: 170px;
+            left: 100px;
+        }
+
+        .rating {
+            position: absolute;
+            top: 580px;
+            left: 100px;
+        }
+
+        .rating2 {
+            position: absolute;
+            top: 600px;
+            left: 100px;
+        }
+
+        .tiposInversiones {
+            position: absolute;
+            top: 680px;
+            left: 100px;
+        }
+
+        .tiposInversiones2 {
+            position:  absolute;
+            top: 700px;
+            left: 100px;
+        }
+
+        .InvMinima {
+            position: absolute;
+            top: 740px;
+            left: 100px;
+        }
+
+        .InvMinima2 {
+            position: absolute;
+            top: 760px;
+            left: 100px;
+        }
+
+        .interes {
+            position: absolute;
+            top: 960px;
+            left: 100px;
+        }
+
+        .interes2 {
+            position: absolute;
+            top: 980px;
+            left: 100px;
+        }
+
+        .plazo {
+            position: absolute;
+            top: 1060px;
+            left: 100px;
+        }
+
+        .plazo2 {
+            position: absolute;
+            top: 1080px;
+            left: 100px;
+        }
+
+        .botonFiltro {
+            position: absolute;
+            float: right;
+            top: 800px;
+            left: 100px;
+        }
+
+        .botonSave {
+            position: absolute;
+            float: right;
+            top: 1060px;
+            left: 100px;
+        }
+
+        table.GeneratedTable {
+            left: 1000px;
+            background-color: white;
+            text-align: left;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            table.GeneratedTable th, td {
+                padding: 20px;
+            }
+
+            table.GeneratedTable thead {
+                background-color: #246355;
+                border-bottom: solid 5px #0F362D;
+                color: white;
+            }
+
+            table.GeneratedTable tr:nth-child(even) {
+                background-color: #ddd;
+            }
+
+            table.GeneratedTable tr:hover td {
+                background-color: #369681;
+                color: white;
+            }
+    </style>
+</head>
+
+
+<h2>Publicar Proyectos</h2>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-controller="Solicitudes" asp-action="SelectProyectosForSolicitud"
+      method="get">
+    <p>
+
+            <label asp-for="nombreProyecto"></label>
+            <input asp-for="nombreProyecto" size="30" />
+            <span asp-validation-for="nombreProyecto" class="text-danger"></span>
+        
+
+        <table class="" align="left">
+            <tr>
+
+                <td>
+                    @* Filtrar por Areas *@
+                    <label asp-for="areas" class="areas"> </label>
+
+                    <div class="areas2">
+                        <div class="">
+                            @{
+                                foreach (var item in Model.areas)
+                                {
+                                    <input type="checkbox" name="areasSeleccionada" value="@item.Nombre" />
+                                    @item.Nombre
+                                    <br />
+                                }
+                            }
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    @* Filtrar tipo de inversión *@
+                    <label asp-for="Tipos" class="rating"> </label>
+
+                    <div class="rating2">
+                        <div class="">
+                            @{
+                                foreach (var item in Model.Tipos)
+                                {
+                                    <input type="checkbox" name="tipoSeleccionado" value="@item.Nombre" />
+                                    @item.Nombre
+                                    <br />
+                                }
+                            }
+                        </div>
+                    </div>
+
+                </td>
+
+                <td>
+                    @*Filtrado por fecha*@
+                    <label asp-for="fecha" class="tiposInversiones"></label>
+                    <input asp-for="fecha" size="25" type="date" class="tiposInversiones2" />
+                </td>
+                <td>
+                    @*Filtrado por Capital*@
+                    <label asp-for="capital" class="InvMinima"></label>
+                    <input asp-for="capital" size="25" type="number" class="InvMinima2" />
+                </td>
+
+            </tr>
+        </table>
+
+
+
+
+
+        <input class="botonFiltro" type="submit" value="Filtrar" />
+
+
+
+
+
+
+    </p>
+</form>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="SelectProyectosForSolicitud" method="post">
+    <table class="GeneratedTable">
+        <thead>
+            <tr>
+                <th>
+                    Nombre del proyecto
+                </th>
+                <th>
+                    Fecha de Expiración
+                </th>
+                <th>
+                    Área temática
+                </th>
+                <th>
+                    Tipo de inversión
+                </th>
+                <th>
+                    Capital
+                </th>
+                <th>
+                    Seleccionar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.proyectos.Count() == 0)
+            {
+                <tr><td colspan="3">No hay proyectos para publicar</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model.proyectos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaExpiracion)
+                        </td>
+                        <td>
+                            @foreach (var i in item.ProyectoAreas)
+                            {
+                                @Html.DisplayFor(modelItem => i.Areas.Nombre) <br />
+
+                            }
+                        </td>
+                        <td>
+                            @foreach (var i in item.ProyectoTiposInversiones)
+                            {
+                                @Html.DisplayFor(modelItem => i.TiposInversiones.Nombre) <br />
+
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Importe)
+                        </td>
+                        <td>
+                            <input type="checkbox" name="IdsToAdd" value="@item.ProyectoId">
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-default">Cancel</a>
+</form>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<StartGrow.Models.Inversion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Inversiones realizadas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>            
+            <th>
+                Estado de la Inversión
+            </th>
+            <th>
+                Tipo de Inversion
+            </th>
+            <th>
+                Cantidad Invertida
+            </th>
+            <th>
+                Interés
+            </th>
+            <th>
+                Total Esperado
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadosInversiones)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoInversiones.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cuota)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Intereses)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    <a asp-action="SelectInversionForRecuperarInversion" asp-controller="InversionRecuperadas" asp-route-id="@item.InversionId">Recuperar Inversion</a>
+                </td>
+            </tr>            
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="SelectProyectosForInversion">Realiza una nueva inversion</a>
+</div>
+

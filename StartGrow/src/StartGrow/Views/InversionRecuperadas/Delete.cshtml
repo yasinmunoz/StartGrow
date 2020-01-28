@@ -1,0 +1,51 @@
+﻿@model StartGrow.Models.InversionRecuperada
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>InversionRecuperada</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRecuperacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaRecuperacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Comentario)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Comentario)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadRecuperada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CantidadRecuperada)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Inversion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Inversion.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Monedero)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Monedero.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="InversionRecuperadaId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

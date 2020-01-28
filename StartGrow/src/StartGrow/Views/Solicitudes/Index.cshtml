@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StartGrow.Models.Solicitud>
+
+@{
+    ViewData["Title"] = "Index";
+} 
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="SelectProyectosForSolicitud">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaSolicitud)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proyecto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trabajador)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaSolicitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trabajador.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SolicitudId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SolicitudId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SolicitudId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

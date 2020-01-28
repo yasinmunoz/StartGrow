@@ -1,0 +1,137 @@
+﻿@model StartGrow.Models.InversionRecuperadaViewModels.SelectInversionForRecuperarInversionViewModel;
+
+@{
+    ViewData["Title"] = "Seleccionar Inversion para recuperarla";
+}
+
+
+
+<h2>Seleccionar Inversiones para Recuperar</h2>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form class="from-horizontal" asp-action="SelectInversionForRecuperarInversion" method="">
+    <p>
+        <div>
+            @*Filtrado por Nombre*@
+            <label asp-for="idInv"></label>
+            <input asp-for="idInv" size="50" />
+            <span asp-validation-for="idInv" class="text-danger"></span>
+
+            <label asp-for="inversionAreaSeleccionada"></label>
+            <select asp-for="inversionAreaSeleccionada" asp-items="Model.Areas">
+                <option value="">All</option>
+            </select> 
+
+            <label asp-for="inversionEstadoSeleccionado"></label>
+            <select asp-for="inversionEstadoSeleccionado" asp-items="Model.Estados">
+                <option value="">All</option>
+            </select>
+
+            <label asp-for="inversionTipoSeleccionado"></label>
+            <select asp-for="inversionTipoSeleccionado" asp-items="Model.Tipos">
+                <option value="">All</option>
+            </select>
+
+            <label asp-for="inversionRatingSeleccionado"></label>
+            <select asp-for="inversionRatingSeleccionado" asp-items="Model.Ratings">
+                <option value="">All</option>
+
+            </select>
+            <input type="submit" value="Filtrar" />
+        </div>
+    </p>
+</form>
+
+
+<form asp-action="SelectInversionForRecuperarInversion" method="post">
+
+    <table class="table">
+        <thread>
+            <tr>
+                <th>
+                    Id de la Inversión
+                </th>
+                <th>
+                    Id del Proyecto
+                </th>
+                <th>
+                    Tipo de Inversión
+                </th>
+                <th>
+                    Área
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Cuota
+                </th>
+                <th>
+                    Intereses
+                </th>
+                <th>
+                    Estado de la Inversión
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thread>
+        <tbody>
+            @if (Model.Inversiones.Count() == 0)
+            {
+                <tr><td colspan="3">No hay inversiones disponibles</td></tr>
+            }
+            else
+            {
+                @foreach (var item in Model.Inversiones)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InversionId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoInversiones.Nombre)
+                    </td>
+                    <td>
+                        @foreach (var proyectoAreas in item.Proyecto.ProyectoAreas)
+                        {
+                            @Html.DisplayFor(modelItem => proyectoAreas.Areas.Nombre)
+                        }<br>
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Proyecto.Rating.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cuota) €
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Intereses) €
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstadosInversiones)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total) €
+                    </td>
+                    <td>
+                        <input type="checkbox" name="IdsToAdd" value="@item.InversionId" />
+                    </td>
+
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+
+    <button type="submit" class="btn btn-primary">Siguiente</button>
+    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+</form>
+      
+
+

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<StartGrow.Models.InversionRecuperada>
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Inversiones Recuperadas</h2>
+
+<div>
+    <h4>Detalles</h4>
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id de la Inversión
+                </th>
+                <th>
+                    Proyecto
+                </th>
+                <th>
+                    Área
+                </th>
+                <th>
+                    Tipo de la Inversión
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Cuota
+                </th>
+                <th>
+                    Intereses
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Cantidad Recuperada
+                </th>
+                <th>
+                    Comentario
+                </th>
+                <th>
+                    Fecha de Recuperación
+                </th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (InversionRecuperada invRec in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.InversionId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.Inversion.Proyecto.Nombre)
+                    </td>
+                    <td>
+                        @foreach (var proyectoAreas in invRec.Inversion.Proyecto.ProyectoAreas)
+                        {
+                            @Html.DisplayFor(modelItem => proyectoAreas.Areas.Nombre)
+                        }<br>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.Inversion.TipoInversiones.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.Inversion.Proyecto.Rating.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.Inversion.Cuota) €
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.Inversion.Intereses) €
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.Inversion.Total) €
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.CantidadRecuperada) €
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.Comentario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => invRec.FechaRecuperacion)
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+</div>
+
+<div>
+    <a asp-action="Index">Volver al Índice</a>
+</div>
+
+

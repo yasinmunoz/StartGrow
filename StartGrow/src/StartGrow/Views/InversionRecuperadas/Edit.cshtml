@@ -1,0 +1,54 @@
+﻿@model StartGrow.Models.InversionRecuperada
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>InversionRecuperada</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="InversionRecuperadaId" />
+            <div class="form-group">
+                <label asp-for="FechaRecuperacion" class="control-label"></label>
+                <input asp-for="FechaRecuperacion" class="form-control" />
+                <span asp-validation-for="FechaRecuperacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comentario" class="control-label"></label>
+                <input asp-for="Comentario" class="form-control" />
+                <span asp-validation-for="Comentario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadRecuperada" class="control-label"></label>
+                <input asp-for="CantidadRecuperada" class="form-control" />
+                <span asp-validation-for="CantidadRecuperada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MonederoId" class="control-label"></label>
+                <select asp-for="MonederoId" class="form-control" asp-items="ViewBag.MonederoId"></select>
+                <span asp-validation-for="MonederoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InversionId" class="control-label"></label>
+                <select asp-for="InversionId" class="form-control" asp-items="ViewBag.InversionId"></select>
+                <span asp-validation-for="InversionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,244 @@
+﻿@model StartGrow.Models.InversionViewModels.InversionesCreateViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<head>
+    <style>
+        .areas {
+            position: absolute;
+            top: 150px;
+            left: 100px;
+        }
+
+        .areas2 {
+            position: absolute;
+            top: 170px;
+            left: 100px;
+        }
+
+        .rating {
+            position: absolute;
+            top: 600px;
+            left: 100px;
+        }
+
+        .rating2 {
+            position: absolute;
+            top: 620px;
+            left: 100px;
+        }
+
+        .tiposInversiones {
+            position: absolute;
+            top: 740px;
+            left: 100px;
+        }
+
+        .tiposInversiones2 {
+            position: absolute;
+            top: 760px;
+            left: 100px;
+        }
+
+        .InvMinima {
+            position: absolute;
+            top: 860px;
+            left: 100px;
+        }
+
+        .InvMinima2 {
+            position: absolute;
+            top: 880px;
+            left: 100px;
+        }
+
+        .interes {
+            position: absolute;
+            top: 960px;
+            left: 100px;
+        }
+
+        .interes2 {
+            position: absolute;
+            top: 980px;
+            left: 100px;
+        }
+
+        .plazo {
+            position: absolute;
+            top: 1060px;
+            left: 100px;
+        }
+
+        .plazo2 {
+            position: absolute;
+            top: 1080px;
+            left: 100px;
+        }
+
+        .botonFiltro {
+            position: absolute;
+            float: right;
+            top: 1180px;
+            left: 100px;
+        }
+
+        .botonSave {
+            position: absolute;
+            float: right;
+            top: 1060px;
+            left: 100px;
+        }
+
+        table.GeneratedTable {
+            left: 1000px;
+            background-color: white;
+            text-align: left;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            table.GeneratedTable th, td {
+                padding: 20px;
+            }
+
+            table.GeneratedTable thead {
+                background-color: #246355;
+                border-bottom: solid 5px #0F362D;
+                color: white;
+            }
+
+            table.GeneratedTable tr:nth-child(even) {
+                background-color: #ddd;
+            }
+
+            
+    </style>
+</head>
+
+<h2>Invertir En Los Proyectos Seleccionados</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-horizontal">
+        <h4>Inversión</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstSurname)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstSurname)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SecondSurname)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SecondSurname)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cantidad)€
+            </dd>
+        </dl>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <table class="GeneratedTable">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Rating
+                </th>
+                <th>
+                    Interés
+                </th>
+                <th>
+                    Plazo
+                </th>
+                <th>
+                    Tipo de Inversion
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.inversiones.Count() == 0)
+            {
+                <tr><td colspan="3">No hay Proyectos Disponibles</td></tr>
+            }
+            else
+            {
+                @for (int i = 0; i < Model.inversiones.Count; i++)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.inversiones.ElementAt(i).NombreProyecto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.inversiones.ElementAt(i).Rating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.inversiones.ElementAt(i).Interes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.inversiones.ElementAt(i).Plazo)
+                    </td>
+                    <td>
+                        <div class="dropdown show">
+                            @*<select asp-for="inversiones[i].inversion.TipoInversiones.Nombre" asp-items="ViewBag.TiposInversiones">
+                                <option value=""></option>
+                            </select>*@
+
+                            <select asp-for="inversiones[i].TiposInversionSelected"
+                                asp-items="Model.inversiones[i].TiposInversion">
+                                <option value="">Pick one</option>
+                              </select>
+
+                        </div>
+                    </td>
+                    <td>
+                        <input asp-for="inversiones[i].Cuota" size="10" type="number" />
+
+                        <input asp-for="inversiones[i].NombreProyecto" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].MinInver" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].Cuota" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].Plazo" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].Interes" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].Rating" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].Proyecto" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].ProyectoId" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].TiposInversion" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].TiposInversionSelected" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].inversion.Total" size="10" type="hidden" />
+                        <input asp-for="inversiones[i].inversion.Proyecto.ProyectoId" type="hidden" class="form-control" />
+                        <input asp-for="inversiones[i].inversion.Proyecto.Nombre" type="hidden" class="form-control" />
+                        <input asp-for="inversiones[i].Cantidad" type="hidden" class="form-control" />
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <input type="submit" value="Continuar" class="btn btn-primary" />        
+    </div>
+
+</form>
+<div>
+    <a asp-action="SelectProyectosForInversion">Volver a Seleccionar Proyectos</a>
+</div>

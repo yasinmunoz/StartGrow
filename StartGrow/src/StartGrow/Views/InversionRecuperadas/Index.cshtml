@@ -1,0 +1,59 @@
+﻿@model IEnumerable<StartGrow.Models.InversionRecuperada>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+ 
+<p>
+    <a asp-action="SelectInversionForRecuperarInversion">Recuperar Inversión</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaRecuperacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comentario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CantidadRecuperada)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inversion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monedero)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRecuperacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadRecuperada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inversion.InversionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monedero.MonederoId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.InversionRecuperadaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.InversionRecuperadaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.InversionRecuperadaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

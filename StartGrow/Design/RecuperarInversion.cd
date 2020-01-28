@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="StartGrow.Models.Inversion">
+    <Position X="6.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAQAAAIAAAACCAQAACABAAAABAAAA=</HashCode>
+      <FileName>Inversion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartGrow.Models.Inversor">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Inversor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Inversiones" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="StartGrow.Models.Monedero">
+    <Position X="1.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAACAAAAACAAAABAAAAAA=</HashCode>
+      <FileName>Monedero.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Inversor" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="StartGrow.Models.Proyecto">
+    <Position X="11.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgACAAAAAAAAAAAgAAAAAAAAAAAABAAAQAAAQA=</HashCode>
+      <FileName>Proyecto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartGrow.Models.ApplicationUser">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAEEAAAkCAACAQAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="StartGrow.Models.TiposInversiones" Collapsed="true">
+    <Position X="7.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAABAAAAAAAAAAQAAAAAAAABAAAAA=</HashCode>
+      <FileName>TiposInversiones.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

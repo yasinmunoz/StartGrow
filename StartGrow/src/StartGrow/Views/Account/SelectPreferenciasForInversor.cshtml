@@ -1,0 +1,99 @@
+﻿@model StartGrow.Models.PreferenciasViewModel.SelectPreferenciasForInversorViewModel
+@{
+    ViewData["Title"] = "Preferencias";
+}
+<body style="background-color:#F2F2F2">
+    <p><h2>Seleccionar tus preferencias de inversion</h2></p>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <form asp-action="SelectPreferenciasForInversor" method="post">
+        <p>
+            <table class="table" height="50">
+                <thead>
+                    <tr>
+                        <th>
+                            <center>
+                                Selecciona el Area:
+                            </center>
+                        </th>
+                        <th>
+                            <center>
+                                Selecciona el Rating:
+                            </center>
+                        </th>
+                        <th>
+                            <center>Selecciona el Tipo de Inversion:</center>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Areas.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="3">
+                                No hay Areas registradas.
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.Rating.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="3">
+                                No hay Rating registrado.
+                            </td>
+                        </tr>
+                    }
+                    @if (Model.TiposInversiones.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="3">
+                                No hay Tipos de Inversion registrados.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                @foreach (var item in Model.Areas)
+                                {
+                                    <center>
+                                        <span>
+                                            <b>@Html.DisplayFor(modelItem => item.Nombre):</b>
+                                            <pre><input type="checkbox" name="IdsToAddAreas" value="@item.AreasId"><br /></pre>
+                                        </span>
+                                    </center>
+                                }
+                            </td>
+                            <td>
+                                @foreach (var item in Model.Rating)
+                                {
+                                    <center>
+                                        <b>@Html.DisplayFor(modelItem => item.Nombre)</b>
+                                        <pre><input type="checkbox" name="IdsToAddRating" value="@item.RatingId"><br /></pre>
+                                    </center>
+                                }
+                            </td>
+                            <td>
+                                @foreach (var item in Model.TiposInversiones)
+                                {
+                                    <center>
+                                        <b>@Html.DisplayFor(modelItem => item.Nombre):</b>
+                                        <pre><input type="checkbox" name="IdsToAddTiposInversion" value="@item.TiposInversionesId"><br /></pre>
+                                    </center>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="SelectPreferenciasForInversor" class="btn btn-default">Cancelar</a>
+        </p>
+    </form>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+</body>
